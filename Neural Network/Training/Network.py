@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import Layer
 import Neuron
@@ -16,6 +16,7 @@ class NeuralNetwork:
         self.input_layer = inputs
         self.hidden_layers = hidden_layers
         self.output_layer = outputs
+        self.network_error = 0
 
     def edit_input_layer_neuron(self, i: int, new_val: type(Neuron.Neuron)):
         """
@@ -44,3 +45,23 @@ class NeuralNetwork:
         :return: None
         """
         self.output_layer[i] = new_val
+
+    def calculate_square_error(self, results: Dict[float: float]) -> float:
+        """
+        Calculates the accuracy of a network.
+        :param results: A dictionary containing the output values of the training as the keys and the actual values of the training as the values. All values should be between 0 and 1. (Dict[float: float])
+        :return: The error of the network as a float between 0 and 1. (float)
+        """
+        sum_err = sum(self.__calc_sqr_err_gen(results))
+        self.network_error = sum_err / len(results)
+        return self.network_error
+
+    @staticmethod
+    def __calc_sqr_err_gen(results: Dict[float: float]) -> iter:
+        """
+        A generator function used to calculate sum of the errors of each output neuron in a network.
+        :param results: A dictionary containing the output values of the training as the keys and the actual values of the training as the values. All values should be between 0 and 1. (Dict[float: float])
+        :return: An iterable object. (object)
+        """
+        for i, j in results.items():
+            yield (j - i) ** 2
