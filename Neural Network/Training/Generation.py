@@ -1,4 +1,4 @@
 class Generation:
     def __init__(self):
-        pass
+        self.networks = list()
 

@@ -1,4 +1,5 @@
-from typing import List, Dict
+from typing import List, Dict, Union
+import pandas as pd
 
 import Layer
 import Neuron
