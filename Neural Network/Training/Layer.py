@@ -16,13 +16,6 @@ class Layer:
         """
         self.layer: List[type(Neuron.Neuron)] = [Neuron.Neuron for _ in range(size)]
 
-    def get_layer_size(self) -> int:
-        """
-        Returns the size of the layer
-        :return: The size of the layer (int)
-        """
-        return len(self.layer)
-
     def __iadd__(self, other: Neuron.Neuron):
         """
         Adds another neuron to the layer
@@ -30,6 +23,20 @@ class Layer:
         :return: None
         """
         self.layer.append(other)
+
+    def __len__(self) -> int:
+        """
+        Gets the amount of neurons in the layer.
+        :return: The amount of neurons in the layer (int)
+        """
+        return len(self.layer)
+
+    def get_layer_size(self) -> int:
+        """
+        Returns the size of the layer
+        :return: The size of the layer (int)
+        """
+        return len(self.layer)
 
     def edit_layer(self, neuron_i: int, new_weight: float = sys.float_info.min, new_bias: float = sys.float_info.min):
         """

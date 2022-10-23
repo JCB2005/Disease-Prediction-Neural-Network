@@ -21,6 +21,7 @@ class NeuralNetwork:
         self.input_layer = inputs
         self.hidden_layers = hidden_layers
         self.output_layer = outputs
+        self.layers = [self.input_layer] + self.hidden_layers + [self.output_layer]
         self.network_error = 0
 
     def __iadd__(self, other: Layer.Layer):
@@ -30,6 +31,13 @@ class NeuralNetwork:
         :return: None
         """
         self.hidden_layers.append(Layer.Layer())
+
+    def __len__(self) -> int:
+        """
+        Gets the amount of neurons in the network
+        :return: The amount of neurons in the network (int)
+        """
+        return sum(len(x) for x in self.layers)
 
     def neuron_loop(self) -> collections.Iterable:
         """
