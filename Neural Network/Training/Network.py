@@ -6,6 +6,10 @@ import Neuron
 
 
 class NeuralNetwork:
+    """
+    Base structure of a neural network.
+    """
+
     def __init__(self, inputs: type(Layer.Layer), hidden_layers: List[type(Layer.Layer)], outputs: type(Layer.Layer)):
         """
         Initialises the neural networks values
@@ -20,9 +24,18 @@ class NeuralNetwork:
         self.network_error = 0
 
     def __iadd__(self, other: Layer.Layer):
+        """
+        Used to add a hidden layer to the neural network (with the '+=' operator)
+        :param other: The hidden layer to add to the network (Layer.Layer)
+        :return: None
+        """
         self.hidden_layers.append(Layer.Layer())
 
     def neuron_loop(self) -> collections.Iterable:
+        """
+        Used to loop through all neurons in a network
+        :return: An iterable that loops through each neuron in the network
+        """
         layers = self.input_layer + self.hidden_layers + self.output_layer
         for layer in layers:
             for neuron in layer:

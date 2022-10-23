@@ -5,6 +5,10 @@ import sys
 
 
 class Layer:
+    """
+    Base structure of a layer in a neural network
+    """
+
     def __init__(self, size: int = 10):
         """
         Initialises the layer
@@ -28,6 +32,13 @@ class Layer:
         self.layer.append(other)
 
     def edit_layer(self, neuron_i: int, new_weight: float = sys.float_info.min, new_bias: float = sys.float_info.min):
+        """
+        Used to change the weight and bias of a neuron in a layer to be changed.
+        :param neuron_i: The index of the neuron to edit (int)
+        :param new_weight: The new weight of the neuron (The weight will not be changed if the "new_weight" parameter is not changed) (float)
+        :param new_bias: The new bias of the neuron (The bias will not be changed if the "new_bias" parameter is not changed) (float)
+        :return: None
+        """
         self.layer[neuron_i].set_weight(
             new_weight if new_weight != sys.float_info.min else self.layer[neuron_i].get_weight())
 
