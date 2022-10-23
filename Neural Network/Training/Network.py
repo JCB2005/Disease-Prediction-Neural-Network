@@ -1,5 +1,5 @@
-from typing import List, Dict, Union
-import pandas as pd
+import collections
+from typing import List, Dict
 
 import Layer
 import Neuron
@@ -18,6 +18,15 @@ class NeuralNetwork:
         self.hidden_layers = hidden_layers
         self.output_layer = outputs
         self.network_error = 0
+
+    def __iadd__(self, other: Layer.Layer):
+        self.hidden_layers.append(Layer.Layer())
+
+    def neuron_loop(self) -> collections.Iterable:
+        layers = self.input_layer + self.hidden_layers + self.output_layer
+        for layer in layers:
+            for neuron in layer:
+                yield neuron
 
     def edit_input_layer_neuron(self, i: int, new_val: type(Neuron.Neuron)):
         """
