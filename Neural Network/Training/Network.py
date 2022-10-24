@@ -23,6 +23,7 @@ class NeuralNetwork:
         self.output_layer = outputs
         self.layers = [self.input_layer] + self.hidden_layers + [self.output_layer]
         self.output_values = List[float]
+        self.results: Dict[float: float] = dict()
         self.network_error = float()
 
     def __iadd__(self, other: Layer.Layer):
@@ -47,8 +48,6 @@ class NeuralNetwork:
         :param _outputs: The outputs values of the dataset (List[float])
         :return: The results of the network's testing Dict[testing_values: actual_values] (Dict[float: float])
         """
-        final_dict: Dict[float: float] = dict()
-
         network_output_values: Dict[int: List[float]] = dict()
         for i in range(len(self.input_layer)):
             network_output_values[i] = []
@@ -64,9 +63,9 @@ class NeuralNetwork:
         self.output_values = [sum(x) / len(x) for x in network_output_values.values()]
 
         for i, j in zip(self.output_values, _outputs):
-            final_dict[i] = j
+            self.results[i] = j
 
-        return final_dict
+        return self.results
 
     def neuron_loop(self) -> collections.Iterable:
         """
