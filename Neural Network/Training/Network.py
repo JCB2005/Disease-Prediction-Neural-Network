@@ -1,4 +1,5 @@
 import collections
+import random
 from typing import List, Dict
 
 import Layer
@@ -104,6 +105,9 @@ class NeuralNetwork:
         :return: None
         """
         self.output_layer[i] = new_val
+
+    def add_neuron_to_random_hidden_layer(self):
+        self.hidden_layers[random.randint(0, len(self.hidden_layers) - 1)] += Neuron.Neuron()
 
     def calculate_square_error(self, results: Dict[float: float]) -> float:
         """
