@@ -22,7 +22,7 @@ class NeuralNetwork:
         self.hidden_layers = hidden_layers
         self.output_layer = outputs
         self.layers = [self.input_layer] + self.hidden_layers + [self.output_layer]
-        self.network_output_values: Dict[int: List[float]] = {(i for i in range(len(self.input_layer))): list()}
+        self.output_values = List[float]
         self.network_error = float()
 
     def __iadd__(self, other: Layer.Layer):
@@ -40,20 +40,33 @@ class NeuralNetwork:
         """
         return sum(len(x) for x in self.layers)
 
-    def test_network(self, _inputs: List[float]) -> Dict[float: float]:
+    def test_network(self, _inputs: List[float], _outputs: List[float]) -> Dict[float: float]:
         """
-        Tests the network.
+        Calculates the results of the network's testing.
         :param _inputs: The input data - Must be the same size as the input layer - (List[float])
-        Calculates the results of the network's testing
+        :param _outputs: The outputs values of the dataset (List[float])
         :return: The results of the network's testing Dict[testing_values: actual_values] (Dict[float: float])
         """
+        final_dict: Dict[float: float] = dict()
+
+        network_output_values: Dict[int: List[float]] = dict()
+        for i in range(len(self.input_layer)):
+            network_output_values[i] = []
+
         for input_neuron, _inp in zip(self.input_layer, _inputs):
             inp_lyr_out = input_neuron.sigmoid(_inp)
             for hidden_lyr in self.hidden_layers:
                 for hidden_lyr_neuron in hidden_lyr:
                     hidden_lyr_out = hidden_lyr_neuron.sigmoid(inp_lyr_out)
                     for i, out_neuron in enumerate(self.output_layer):
-                        self.network_output_values[i].append(out_neuron.sigmoid(hidden_lyr_out))
+                        network_output_values[i].append(out_neuron.sigmoid(hidden_lyr_out))
+
+        self.output_values = [sum(x) / len(x) for x in network_output_values.values()]
+
+        for i, j in zip(self.output_values, _outputs):
+            final_dict[i] = j
+
+        return final_dict
 
     def neuron_loop(self) -> collections.Iterable:
         """
