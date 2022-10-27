@@ -42,7 +42,7 @@ class NeuralNetwork:
         """
         return sum(len(x) for x in self.layers)
 
-    def test_network(self, _inputs: List[float], _outputs: List[float]) -> Dict[float: float]:
+    def test_network(self, _inputs: List[float], _outputs: List[float]) -> Dict[float, float]:
         """
         Calculates the results of the network's testing.
         :param _inputs: The input data - Must be the same size as the input layer - (List[float])
@@ -109,7 +109,7 @@ class NeuralNetwork:
     def add_neuron_to_random_hidden_layer(self):
         self.hidden_layers[random.randint(0, len(self.hidden_layers) - 1)] += Neuron.Neuron()
 
-    def calculate_square_error(self, results: Dict[float: float]) -> float:
+    def calculate_square_error(self, results: Dict[float, float]) -> float:
         """
         Calculates the accuracy of a network.
         :param results: A dictionary containing the output values of the training as the keys and the actual values of the training as the values. All values should be between 0 and 1. (Dict[float: float])
@@ -120,7 +120,7 @@ class NeuralNetwork:
         return self.network_error
 
     @staticmethod
-    def __calc_sqr_err_gen(results: Dict[float: float]) -> iter:
+    def __calc_sqr_err_gen(results: Dict[float, float]) -> iter:
         """
         A generator function used to calculate sum of the errors of each output neuron in a network.
         :param results: A dictionary containing the output values of the training as the keys and the actual values of the training as the values. All values should be between 0 and 1. (Dict[float: float])
