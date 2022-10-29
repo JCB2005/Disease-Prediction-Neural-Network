@@ -69,3 +69,6 @@ class Generation:
             network.add_neuron_to_random_hidden_layer()
 
         return network
+
+    def print_stats(self):
+        print(f"Best Error: {self.best_err}")
