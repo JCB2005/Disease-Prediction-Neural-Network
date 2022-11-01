@@ -20,7 +20,7 @@ class Neuron:
         :param inp: float
         :return: None
         """
-        out = (math.exp(inp) / (math.exp(inp) + 1)) * self.weight + self.bias
+        out = abs((math.exp(inp) / (math.exp(inp) + 1)) * self.weight + self.bias)
         return out
 
     def set_weight(self, new_weight: float):
