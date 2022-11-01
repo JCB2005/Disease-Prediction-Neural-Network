@@ -12,7 +12,7 @@ class Neuron:
         Initialises the neuron's base values
         """
         self.weight: float = random.randint(-1, 1)
-        self.bias: float = random.randint(-10, 10)
+        self.bias: float = random.randint(-1, 1)
 
     def sigmoid(self, inp: float):
         """
