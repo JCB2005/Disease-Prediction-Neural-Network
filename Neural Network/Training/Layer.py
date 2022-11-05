@@ -15,6 +15,20 @@ class Layer:
         :param size: size of the layer (int)
         """
         self.layer: List[type(Neuron.Neuron)] = [Neuron.Neuron for _ in range(size)]
+        self.max = size
+
+    def __iter__(self):
+        self.n = 0
+        return self.n
+
+    def __next__(self):
+        if self.n <= self.max:
+            result = self.layer[self.n]
+            self.n += 1
+            return result
+
+        else:
+            raise StopIteration
 
     def __iadd__(self, other: Neuron.Neuron):
         """
@@ -23,6 +37,7 @@ class Layer:
         :return: None
         """
         self.layer.append(other)
+        self.max += 1
 
     def __len__(self) -> int:
         """
