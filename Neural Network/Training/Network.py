@@ -11,12 +11,14 @@ class NeuralNetwork:
     Base structure of a neural network.
     """
 
-    def __init__(self, inputs: type(Layer.Layer), hidden_layers: List[type(Layer.Layer)], outputs: type(Layer.Layer)):
+    def __init__(self, inputs: type(Layer.Layer), hidden_layers: List[type(Layer.Layer)], outputs: type(Layer.Layer), dataset_inputs: List[float], dataset_outputs: List[float]):
         """
         Initialises the neural networks values
         :param inputs: The inputs the network has (Layer)
         :param hidden_layers: The hidden layers the network has (List[Layer])
         :param outputs: The output neurons the network has (Layer)
+        :param dataset_inputs: The input values of the dataset (List[float])
+        :param dataset_outputs: The output values of the dataset (List[float])
         """
         # Initialise the layers of the network
         self.input_layer = inputs
@@ -24,7 +26,7 @@ class NeuralNetwork:
         self.output_layer = outputs
         self.layers = [self.input_layer] + self.hidden_layers + [self.output_layer]
         self.output_values = List[float]
-        self.results: Dict[float: float] = dict()
+        self.results: Dict[float: float] = self.test_network(dataset_inputs, dataset_outputs)
         self.network_error = float()
 
     def __iadd__(self, other: Layer.Layer):
