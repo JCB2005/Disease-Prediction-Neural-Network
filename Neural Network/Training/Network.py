@@ -55,7 +55,7 @@ class NeuralNetwork:
         for i in range(len(self.input_layer)):
             network_output_values[i] = []
 
-        for input_neuron, _inp in zip(self.input_layer, _inputs):
+        for input_neuron, _inp in zip(self.input_layer.layer, _inputs):
             inp_lyr_out = input_neuron.sigmoid(_inp)
             for hidden_lyr in self.hidden_layers:
                 for hidden_lyr_neuron in hidden_lyr:
