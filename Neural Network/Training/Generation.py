@@ -12,7 +12,7 @@ class Generation:
 
     def __init__(self, networks: List[Network.NeuralNetwork]):
         self.networks: List[Network.NeuralNetwork] = networks
-        self.best_network = Network.NeuralNetwork
+        self.best_network: Network.NeuralNetwork
         self.best_err = sys.float_info.max
 
     def __find_best_network(self, _networks: List[Network.NeuralNetwork]) -> Network.NeuralNetwork:
